@@ -3,4 +3,10 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="personajes">Personajes</string>
+    <string name="perfil">Perfil</string>
+    <string name="descrip">Descripcion del juego</string>
+    <string name="objetos">Objetos del mapa</string>
+    <string name="tips">Tips</string>
+    <string name="ajustes">Ajustes</string>
 </resources>
