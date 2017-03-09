@@ -9,4 +9,12 @@
     <string name="objetos">Objetos del mapa</string>
     <string name="tips">Tips</string>
     <string name="ajustes">Ajustes</string>
+    <string name="version">Version 1.0</string>
+    <string name="info">Desarrollado por Diego</string>
+    <string name="contacto">Tlf:666666666</string>
+    <string name="descripcion">Para jugar a este juego de naves usa las flechas del  teclado.</string>
+    <string name="nombre">Nombre</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="iniciar">Inciar sesion</string>
+    <string name="registrar">Registrarse</string>
 </resources>

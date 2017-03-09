@@ -22,6 +22,7 @@ import com.alumnos.hnd_task2.test.ModeloObjeto;
 
 import java.util.ArrayList;
 
+import static com.alumnos.hnd_task2.R.id.listObjetos;
 import static com.alumnos.hnd_task2.R.id.listPersonajes;
 
 
@@ -43,8 +44,8 @@ public class ListObjetosFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_list_personajes, container, false);
-        listObjetos = (ListView) view.findViewById(listPersonajes);
+        View view = inflater.inflate(R.layout.fragment_list_objetos, container, false);
+        listObjetos = (ListView) view.findViewById(R.id.listObjetos);
         objetos = ModeloObjeto.getObjetos();
         ObjetosAdapter adapter = new ObjetosAdapter(getActivity(), R.layout.item_objeto, objetos);
         listObjetos.setAdapter(adapter);
