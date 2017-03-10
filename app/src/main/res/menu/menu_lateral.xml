@@ -23,8 +23,13 @@
             android:title="@string/tips" />
 
         <item
-            android:id="@+id/item_ajustes"
-            android:title="@string/ajustes" />
+        android:id="@+id/item_ajustes"
+        android:title="@string/ajustes" />
+
+        <item
+            android:id="@+id/item_salir"
+            android:title="@string/salir" />
+
 
     </group>
 </menu>

@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.alumnos.hnd_task2.R;
+import com.alumnos.hnd_task2.activities.ObjetoActivity;
 import com.alumnos.hnd_task2.activities.PersonajeActivity;
 import com.alumnos.hnd_task2.adapters.ObjetosAdapter;
 import com.alumnos.hnd_task2.adapters.PersonajesAdapter;
@@ -66,7 +67,7 @@ public class ListObjetosFragment extends Fragment
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int posicion, long l) {
         ObjetoBean objetoBean = objetos.get(posicion);
-        Intent intent = new Intent(getActivity(), PersonajeActivity.class);
+        Intent intent = new Intent(getActivity(), ObjetoActivity.class);
         intent.putExtra(OBJETO_KEY, objetoBean);
 
         startActivity(intent);

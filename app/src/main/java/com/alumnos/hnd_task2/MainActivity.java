@@ -1,5 +1,6 @@
 package com.alumnos.hnd_task2;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.alumnos.hnd_task2.activities.LoginActivity;
 import com.alumnos.hnd_task2.fragments.AjustesFragment;
 import com.alumnos.hnd_task2.fragments.DescripFragment;
 import com.alumnos.hnd_task2.fragments.ListObjetosFragment;
@@ -79,6 +81,13 @@ public class MainActivity extends AppCompatActivity        implements Navigation
             case R.id.item_objetos:
                 ListObjetosFragment listObjetosFragment = ListObjetosFragment.newInstance();
                 fm.beginTransaction().replace(R.id.container,listObjetosFragment).commit();
+                break;
+            case R.id.item_salir:
+                Preferencias preferencias = new Preferencias(MainActivity.this);
+                preferencias.setLogin(false);
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
                 break;
         }
         item.setChecked(true);

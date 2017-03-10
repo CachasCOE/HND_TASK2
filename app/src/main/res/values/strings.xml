@@ -17,4 +17,9 @@
     <string name="contraseña">Contraseña</string>
     <string name="iniciar">Inciar sesion</string>
     <string name="registrar">Registrarse</string>
+    <string name="nombre_hint">Nombre</string>
+    <string name="pass_hint">COntraseña</string>
+    <string name="pass2_hint">Repite Contraseña</string>
+    <string name="guardar">Guardar</string>
+    <string name="salir">Salir</string>
 </resources>
