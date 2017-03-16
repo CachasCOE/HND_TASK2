@@ -1,9 +1,13 @@
 package com.alumnos.hnd_task2.fragments;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,13 +17,23 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
+
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 import com.alumnos.hnd_task2.Preferencias;
 import com.alumnos.hnd_task2.R;
 import com.alumnos.hnd_task2.beans.UsuarioBean;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
+import static android.support.v7.appcompat.R.id.image;
+
 
 public class PerfilFragment extends Fragment implements View.OnClickListener {
-
 
 
     private TextView txtUsuario;
@@ -81,11 +95,12 @@ public class PerfilFragment extends Fragment implements View.OnClickListener {
     }
 
 
+
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
 
 
 }
