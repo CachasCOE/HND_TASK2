@@ -2,12 +2,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.alumnos.hnd_task2.fragments.DescripFragment">
+    tools:context="com.alumnos.hnd_task2.fragments.DescripFragment"
+    android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView android:id="@+id/txtDescrip"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/descripcion" />
+
+    <Button android:id="@+id/btnComp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/COMPARTIR"/>
 
 </LinearLayout>

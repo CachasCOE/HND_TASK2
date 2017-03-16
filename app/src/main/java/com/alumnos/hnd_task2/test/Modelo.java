@@ -14,9 +14,9 @@ public class Modelo {
 
         ArrayList<PersonajeBean> personajes = new ArrayList<>();
 
-        personajes.add(new PersonajeBean("Personaje bueno", R.drawable.camisa1));
-        personajes.add(new PersonajeBean("Personaje malo", R.drawable.camisa1));
-        personajes.add(new PersonajeBean("Personaje malo pequeño", R.drawable.camisa1));
+        personajes.add(new PersonajeBean("Personaje bueno", R.drawable.buena));
+        personajes.add(new PersonajeBean("Personaje malo", R.drawable.mala));
+        personajes.add(new PersonajeBean("Personaje malo pequeño", R.drawable.neutral));
 
         return personajes;
 

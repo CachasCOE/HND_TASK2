@@ -22,4 +22,5 @@
     <string name="pass2_hint">Repite Contraseña</string>
     <string name="guardar">Guardar</string>
     <string name="salir">Salir</string>
+    <string name="COMPARTIR">compartir</string>
 </resources>

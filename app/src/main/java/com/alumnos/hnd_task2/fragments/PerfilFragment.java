@@ -1,6 +1,7 @@
 package com.alumnos.hnd_task2.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alumnos.hnd_task2.Preferencias;
@@ -15,10 +18,13 @@ import com.alumnos.hnd_task2.R;
 import com.alumnos.hnd_task2.beans.UsuarioBean;
 
 
-public class PerfilFragment extends Fragment {
+public class PerfilFragment extends Fragment implements View.OnClickListener {
+
 
 
     private TextView txtUsuario;
+    private ImageView imgPerfil;
+    private Button btnCambiar;
 
     private OnFragmentInteractionListener mListener;
 
@@ -34,6 +40,10 @@ public class PerfilFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
         txtUsuario = (TextView) view.findViewById(R.id.txtUsuario);
+        imgPerfil = (ImageView) view.findViewById(R.id.imgPerfil);
+        btnCambiar = (Button) view.findViewById(R.id.btnCambiar);
+
+        btnCambiar.setOnClickListener(this);
 
         Preferencias preferencias = new Preferencias(getActivity());
         UsuarioBean usuario = preferencias.getUsuario();
@@ -65,9 +75,17 @@ public class PerfilFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onClick(View view) {
+
+    }
+
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
+
 }

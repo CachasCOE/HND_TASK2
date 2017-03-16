@@ -22,5 +22,8 @@
         <activity android:name=".activities.TipActivity" />
         <activity android:name=".activities.NuevoUsuarioActivity"></activity>
     </application>
+    <uses-permission android:name="android.permission.CAMERA" />
 
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 </manifest>
