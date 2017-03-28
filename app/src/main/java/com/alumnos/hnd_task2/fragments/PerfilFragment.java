@@ -2,27 +2,41 @@ package com.alumnos.hnd_task2.fragments;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import static android.Manifest.permission.CAMERA;
+import static  android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
-
-
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
+import com.alumnos.hnd_task2.MainActivity;
 import com.alumnos.hnd_task2.Preferencias;
 import com.alumnos.hnd_task2.R;
 import com.alumnos.hnd_task2.beans.UsuarioBean;
@@ -30,15 +44,28 @@ import com.alumnos.hnd_task2.beans.UsuarioBean;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
+import static android.app.Activity.RESULT_OK;
+import static android.support.v7.appcompat.R.id.checkbox;
 import static android.support.v7.appcompat.R.id.image;
 
 
 public class PerfilFragment extends Fragment implements View.OnClickListener {
 
+    private static String APP_DIRECTORY = "MyPictureApp/";
+    private static String MEDIA_DIRECTORY = APP_DIRECTORY + "PictureApp";
+
+    private final int MY_PERMISSIONS = 100;
+    private final int PHOTO_CODE = 200;
+    private final int SELECT_PICTURE = 300;
+    private String TEMPORAL_PICTURE_NAME = "temporal.jpg";
+    private UsuarioBean usuariobean;
 
     private TextView txtUsuario;
     private ImageView imgPerfil;
     private Button btnCambiar;
+    private LinearLayout LView;
+
+    private String mPath;
 
     private OnFragmentInteractionListener mListener;
 
@@ -56,6 +83,7 @@ public class PerfilFragment extends Fragment implements View.OnClickListener {
         txtUsuario = (TextView) view.findViewById(R.id.txtUsuario);
         imgPerfil = (ImageView) view.findViewById(R.id.imgPerfil);
         btnCambiar = (Button) view.findViewById(R.id.btnCambiar);
+        LView = (LinearLayout) view.findViewById(R.id.LView);
 
         btnCambiar.setOnClickListener(this);
 
@@ -63,8 +91,14 @@ public class PerfilFragment extends Fragment implements View.OnClickListener {
         UsuarioBean usuario = preferencias.getUsuario();
         Log.d("PerfilFragment","---->"+usuario.toJson());
         txtUsuario.setText("Usuario: "+ usuario.getNombre());
+        if(usuario.getImgPerfil()!=null && !usuario.getImgPerfil().isEmpty()) {
+            imgPerfil.setImageURI(Uri.parse(usuario.getImgPerfil()));
+        }
+
         return view;
     }
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -91,11 +125,73 @@ public class PerfilFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-
+        final CharSequence[] options = {"Tomar foto", "Elegir de galeria", "Cancelar"};
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Elige una opcion");
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if(options[i] == "Tomar foto"){
+                    openCamera();
+                }else if(options[i] == "Elegir de galeria"){
+                    Intent intent = new Intent
+                            (Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    intent.setType("image/*");
+                    startActivityForResult(intent.createChooser(intent, "Seleccion app de imagen"),
+                           SELECT_PICTURE );
+                }else if(options[i] == "Cancelar"){
+                    dialogInterface.dismiss();
+                }
+            }
+        });
+        builder.show();
     }
 
+    private void openCamera() {
+        File file = new File(Environment.getExternalStorageDirectory(), MEDIA_DIRECTORY);
+        file.mkdirs();
 
+        String path = Environment.getExternalStorageDirectory() + File.separator
+                + MEDIA_DIRECTORY + File.separator + TEMPORAL_PICTURE_NAME;
 
+        File newFile = new File(path);
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(newFile));
+        startActivityForResult(intent, PHOTO_CODE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode){
+            case PHOTO_CODE:
+                if(resultCode == RESULT_OK){
+                    String dir = Environment.getExternalStorageDirectory() + File.separator
+                            + MEDIA_DIRECTORY + File.separator + TEMPORAL_PICTURE_NAME;
+                    decodeBitmap(dir);
+                }
+                break;
+
+            case SELECT_PICTURE:
+                if(resultCode == RESULT_OK){
+                    Uri path = data.getData();
+                    imgPerfil.setImageURI(path);
+                    usuariobean = new UsuarioBean();
+                    usuariobean.setImgPerfil(path.toString());
+                    Preferencias preferencias = new Preferencias(getActivity());
+                    preferencias.setUsuario(usuariobean);
+                }
+        }
+    }
+
+    private void decodeBitmap(String dir) {
+        Bitmap bitmap;
+        bitmap = BitmapFactory.decodeFile(dir);
+
+        imgPerfil.setImageBitmap(bitmap);
+    }
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
@@ -103,4 +199,5 @@ public class PerfilFragment extends Fragment implements View.OnClickListener {
     }
 
 
-}
+    }
+
