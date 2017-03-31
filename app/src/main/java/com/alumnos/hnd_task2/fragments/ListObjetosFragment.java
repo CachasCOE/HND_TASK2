@@ -41,7 +41,7 @@ public class ListObjetosFragment extends Fragment
     public static ListObjetosFragment newInstance(){
         return new ListObjetosFragment();
     }
-
+//inicializas los objetos y seteas el adapter de objetos
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class ListObjetosFragment extends Fragment
     public void onDetach() {
         super.onDetach();
     }
-
+//te lleva al detalle del objeto seleccionado en el listview
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int posicion, long l) {
         ObjetoBean objetoBean = objetos.get(posicion);

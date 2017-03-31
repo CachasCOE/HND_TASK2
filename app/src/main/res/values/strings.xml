@@ -24,4 +24,13 @@
     <string name="salir">Salir</string>
     <string name="COMPARTIR">compartir</string>
     <string name="cambiar">Cambair img</string>
+    <string name="incorrectos">Datos incorrectos</string>
+    <string name="noExiste">El usuario no existe</string>
+    <string name="obligatorios">Los datos son obligatorios</string>
+    <string name="guardado">usuario guardado correctamente</string>
+    <string name="foto">Tomar foto</string>
+    <string name="galeria">Elegir galeria</string>
+    <string name="cancelar">cancelar</string>
+    <string name="opcion">Elige una opcion</string>
+    <string name="appImg">Selecciona app de imagen</string>
 </resources>

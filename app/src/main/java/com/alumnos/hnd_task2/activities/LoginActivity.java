@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             btnIniciar.setOnClickListener(this);
             btnRegistrar.setOnClickListener(this);
         } else {
+            //abre el main tsi estas ya logeado
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
@@ -60,13 +61,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             startActivity(intent);
                             finish();
                         } else {
-                            Toast.makeText(LoginActivity.this, "Datos incorrectos", Toast.LENGTH_SHORT).show();
+                            // datos incorrectos
+                            Toast.makeText(LoginActivity.this, getString(R.string.incorrectos), Toast.LENGTH_SHORT).show();
                         }
                     }else{
-                        Toast.makeText(LoginActivity.this, "No existe el usuario", Toast.LENGTH_SHORT).show();
+                        //datos no existente
+                        Toast.makeText(LoginActivity.this, getString(R.string.noExiste), Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(LoginActivity.this, "Datos obligatorios", Toast.LENGTH_SHORT).show();
+                    //datos obligatorios
+                    Toast.makeText(LoginActivity.this, getString(R.string.obligatorios), Toast.LENGTH_SHORT).show();
                 }
 
                 break;

@@ -37,7 +37,7 @@ public class TipsFragment extends Fragment implements AdapterView.OnItemClickLis
     public static TipsFragment newInstance(){
         return new TipsFragment();
     }
-
+//inicializa el list y setea el adpater
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class TipsFragment extends Fragment implements AdapterView.OnItemClickLis
     public void onDetach() {
         super.onDetach();
     }
-
+// abre el detalle de tip seleccionado
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int posicion, long l) {
         TipsBean tipsBean = tips.get(posicion);

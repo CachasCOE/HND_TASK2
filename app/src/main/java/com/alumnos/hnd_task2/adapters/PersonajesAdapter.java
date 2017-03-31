@@ -32,7 +32,7 @@ public class PersonajesAdapter extends ArrayAdapter<PersonajeBean> {
     class ViewHolder{
         TextView txtDescripcion;
     }
-
+    //muestra en la lista el nombre del personaje
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

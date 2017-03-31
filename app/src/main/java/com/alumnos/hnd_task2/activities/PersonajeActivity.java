@@ -18,7 +18,7 @@ public class PersonajeActivity extends AppCompatActivity implements View.OnClick
     private ImageView imgPersonaje;
     private TextView txtDescripcion;
     private Button btnComp;
-
+    //muestra los datos dle objeto clikeado
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +38,7 @@ public class PersonajeActivity extends AppCompatActivity implements View.OnClick
 
         btnComp.setOnClickListener(this);
     }
-
+// comparte los datos del detalle
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(Intent.ACTION_SEND);

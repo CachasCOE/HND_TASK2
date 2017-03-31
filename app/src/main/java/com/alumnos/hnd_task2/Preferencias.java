@@ -19,7 +19,7 @@ public class Preferencias {
     public Preferencias(Context context) {
         this.context = context;
     }
-
+// setea el usuario ya transformado a json desde usuarioBean
     public void setUsuario(UsuarioBean usuario){
         String usuarioJson = usuario.toJson();
 
@@ -30,7 +30,7 @@ public class Preferencias {
         editor.putString(USUARIO, usuarioJson);
         editor.commit();
     }
-
+    // getea el usuario ya transformado a json desde usuarioBean
     public UsuarioBean getUsuario(){
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCIAS,
                 Context.MODE_PRIVATE);
@@ -40,7 +40,7 @@ public class Preferencias {
 
     }
 
-
+    // guarda el login
     public void setLogin(boolean login){
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCIAS,
                 Context.MODE_PRIVATE);

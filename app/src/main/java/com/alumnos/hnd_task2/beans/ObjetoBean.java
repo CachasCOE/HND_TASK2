@@ -15,7 +15,7 @@ public class ObjetoBean implements Serializable {
     }
 
 
-
+// getters y setters de cada objeto
     public String getDescripcion() {
         return descripcion;
     }

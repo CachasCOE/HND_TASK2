@@ -33,7 +33,7 @@ public class ObjetosAdapter extends ArrayAdapter<ObjetoBean> {
     class ViewHolder{
         TextView txtDescripcion;
     }
-
+//muestra en la lista el nombre del objeto
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

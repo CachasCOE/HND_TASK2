@@ -28,6 +28,7 @@ public class DescripFragment extends Fragment implements View.OnClickListener {
     public static DescripFragment newInstance(){
         return new DescripFragment();
     }
+    //inicializa el boton y el texto
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -61,7 +62,7 @@ public class DescripFragment extends Fragment implements View.OnClickListener {
         super.onDetach();
         mListener = null;
     }
-
+//compartes la descripcion
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(Intent.ACTION_SEND);

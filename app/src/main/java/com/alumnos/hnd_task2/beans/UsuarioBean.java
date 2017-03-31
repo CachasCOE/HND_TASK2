@@ -19,7 +19,7 @@ public class UsuarioBean implements Serializable {
     public UsuarioBean() {
     }
 
-
+    // getters y setters del usuario
     public String getNombre() {
         return nombre;
     }
@@ -43,7 +43,7 @@ public class UsuarioBean implements Serializable {
     public void setImgPerfil(String imgPerfil) {
         this.imgPerfil = imgPerfil;
     }
-
+//cambia los datos de usuario a json
     public String toJson(){
         Gson gson = new Gson();
         return gson.toJson(this);

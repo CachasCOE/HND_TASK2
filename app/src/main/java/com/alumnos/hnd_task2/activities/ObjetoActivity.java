@@ -20,7 +20,7 @@ public class ObjetoActivity extends AppCompatActivity implements View.OnClickLis
     private ImageView imgObjeto;
     private TextView txtDescripcionObj;
     private Button btnComp;
-
+//muestra los datos dle objeto clikeado
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +41,7 @@ public class ObjetoActivity extends AppCompatActivity implements View.OnClickLis
 
         btnComp.setOnClickListener(this);
     }
-
+// comparte los datos
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(Intent.ACTION_SEND);

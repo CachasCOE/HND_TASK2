@@ -16,7 +16,7 @@ public class TipsBean implements Serializable {
     }
 
 
-
+    // getters y setters de cada tip
     public String getDescripcion() {
 
         return descripcion;

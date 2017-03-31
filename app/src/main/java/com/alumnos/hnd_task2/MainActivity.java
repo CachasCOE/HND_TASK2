@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity        implements Navigation
     private DrawerLayout drawer;
     private NavigationView navView;
     private FragmentManager fm;
-
+//inicializa el toolbar y el menulateral
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity        implements Navigation
         }
         return true;
     }
-
+//objetos del menu lateral y a donde te llevan
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){

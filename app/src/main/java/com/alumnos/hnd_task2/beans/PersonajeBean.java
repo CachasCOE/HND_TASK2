@@ -17,7 +17,7 @@ public class PersonajeBean implements Serializable {
     }
 
 
-
+    // getters y setters de cada personaje
     public String getDescripcion() {
         return descripcion;
     }

@@ -22,7 +22,7 @@ public class TipActivity extends AppCompatActivity implements View.OnClickListen
     private TextView txtDescripcionTips, txtTitulo;
 
     private Button btnComp;
-
+    //muestra los datos dle objeto clikeado
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +42,7 @@ public class TipActivity extends AppCompatActivity implements View.OnClickListen
 
         btnComp.setOnClickListener(this);
     }
-
+//compartes los contenidos del detalle
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(Intent.ACTION_SEND);

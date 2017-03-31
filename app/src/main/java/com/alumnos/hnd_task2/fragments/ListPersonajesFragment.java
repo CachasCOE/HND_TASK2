@@ -34,7 +34,7 @@ public class ListPersonajesFragment extends Fragment
     public static ListPersonajesFragment newInstance(){
         return new ListPersonajesFragment();
     }
-
+//inicializa el list view y setea el adapter
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,6 +57,8 @@ public class ListPersonajesFragment extends Fragment
         super.onDetach();
     }
 
+
+    //te lleva al detalle del personaje seleccionado en el listview
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int posicion, long l) {
         PersonajeBean personajeBean = personajes.get(posicion);

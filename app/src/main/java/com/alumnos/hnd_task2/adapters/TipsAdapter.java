@@ -33,7 +33,7 @@ public class TipsAdapter extends ArrayAdapter<TipsBean> {
     class ViewHolder{
         TextView txtTitulo;
     }
-
+    //muestra en la lista el titulo dle tip
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

@@ -46,17 +46,17 @@ public class NuevoUsuarioActivity extends AppCompatActivity implements View.OnCl
 
             Preferencias preferencias = new Preferencias(NuevoUsuarioActivity.this);
             preferencias.setUsuario(usuarioBean);
-
+            //mensaje de guardado
             Toast.makeText(NuevoUsuarioActivity.this,
-                    "El usuario se ha guardado correctamente",
+                    getString(R.string.guardado),
                     Toast.LENGTH_SHORT).show();
-
+            //abre login activity despues del registro
             Intent intent = new Intent(NuevoUsuarioActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
         }else{
             Toast.makeText(NuevoUsuarioActivity.this,
-                    "Todos los datos son obligatorios",
+                    getString(R.string.obligatorios),
                     Toast.LENGTH_SHORT).show();
         }
     }
