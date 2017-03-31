@@ -39,6 +39,7 @@ import java.io.InputStream;
 import com.alumnos.hnd_task2.MainActivity;
 import com.alumnos.hnd_task2.Preferencias;
 import com.alumnos.hnd_task2.R;
+import com.alumnos.hnd_task2.activities.PersonajeActivity;
 import com.alumnos.hnd_task2.beans.UsuarioBean;
 
 import java.io.FileNotFoundException;
@@ -62,7 +63,7 @@ public class PerfilFragment extends Fragment implements View.OnClickListener {
 
     private TextView txtUsuario;
     private ImageView imgPerfil;
-    private Button btnCambiar;
+    private Button btnCambiar, btnCambiarPass;
     private LinearLayout LView;
 
     private String mPath;
@@ -83,9 +84,11 @@ public class PerfilFragment extends Fragment implements View.OnClickListener {
         txtUsuario = (TextView) view.findViewById(R.id.txtUsuario);
         imgPerfil = (ImageView) view.findViewById(R.id.imgPerfil);
         btnCambiar = (Button) view.findViewById(R.id.btnCambiar);
+        btnCambiarPass = (Button) view.findViewById(R.id.btnCambiarPass);
         LView = (LinearLayout) view.findViewById(R.id.LView);
 
         btnCambiar.setOnClickListener(this);
+        btnCambiarPass.setOnClickListener(this);
 
         Preferencias preferencias = new Preferencias(getActivity());
         UsuarioBean usuario = preferencias.getUsuario();
@@ -125,26 +128,34 @@ public class PerfilFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        final CharSequence[] options = {getString(R.string.foto), getString(R.string.galeria), getString(R.string.cancelar)};
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(getString(R.string.opcion));
-        builder.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                if(options[i] == getString(R.string.foto)){
-                    openCamera();
-                }else if(options[i] == getString(R.string.galeria)){
-                    Intent intent = new Intent
-                            (Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    intent.setType("image/*");
-                    startActivityForResult(intent.createChooser(intent, getString(R.string.appImg)),
-                           SELECT_PICTURE );
-                }else if(options[i] == getString(R.string.cancelar)){
-                    dialogInterface.dismiss();
-                }
+        switch (view.getId()) {
+            case R.id.btnCambiar:
+                final CharSequence[] options = {getString(R.string.foto), getString(R.string.galeria), getString(R.string.cancelar)};
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle(getString(R.string.opcion));
+                builder.setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (options[i] == getString(R.string.foto)) {
+                            openCamera();
+                        } else if (options[i] == getString(R.string.galeria)) {
+                            Intent intent = new Intent
+                                    (Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                            intent.setType("image/*");
+                            startActivityForResult(intent.createChooser(intent, getString(R.string.appImg)),
+                                    SELECT_PICTURE);
+                        } else if (options[i] == getString(R.string.cancelar)) {
+                            dialogInterface.dismiss();
+                        }
+                    }
+                });
+                builder.show();
+                break;
+            case R.id.btnCambiarPass:
+
+                break;
             }
-        });
-        builder.show();
+
     }
 
     private void openCamera() {
