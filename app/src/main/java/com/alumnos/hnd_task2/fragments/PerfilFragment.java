@@ -177,6 +177,7 @@ public class PerfilFragment extends Fragment implements View.OnClickListener {
             case SELECT_PICTURE:
                 if(resultCode == RESULT_OK){
                     Uri path = data.getData();
+                    Log.d("PerfilFragment","------->"+path.toString());
                     imgPerfil.setImageURI(path);
                     usuariobean = new UsuarioBean();
                     usuariobean.setImgPerfil(path.toString());

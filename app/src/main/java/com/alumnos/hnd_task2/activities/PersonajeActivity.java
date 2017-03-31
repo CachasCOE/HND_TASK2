@@ -24,7 +24,7 @@ public class PersonajeActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personaje);
 
-        PersonajeBean camisaBean = (PersonajeBean) getIntent().getSerializableExtra(ListPersonajesFragment.PERSONAJE_KEY);
+        PersonajeBean personajeBean = (PersonajeBean) getIntent().getSerializableExtra(ListPersonajesFragment.PERSONAJE_KEY);
 
         imgPersonaje = (ImageView) findViewById(R.id.imgPersonaje);
         btnComp = (Button) findViewById(R.id.btnComp);
@@ -32,9 +32,9 @@ public class PersonajeActivity extends AppCompatActivity implements View.OnClick
         txtDescripcion = (TextView) findViewById(R.id.txtDescripcion);
 
 
-        txtDescripcion.setText(camisaBean.getDescripcion());
+        txtDescripcion.setText(personajeBean.getDescripcion());
 
-        imgPersonaje.setImageDrawable(ContextCompat.getDrawable(this,camisaBean.getFoto()));
+        imgPersonaje.setImageDrawable(ContextCompat.getDrawable(this,personajeBean.getFoto()));
 
         btnComp.setOnClickListener(this);
     }
