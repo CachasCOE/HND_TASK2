@@ -33,4 +33,5 @@
     <string name="cancelar">cancelar</string>
     <string name="opcion">Elige una opcion</string>
     <string name="appImg">Selecciona app de imagen</string>
+    <string name="ejemplo">ejemplo.jpg</string>
 </resources>

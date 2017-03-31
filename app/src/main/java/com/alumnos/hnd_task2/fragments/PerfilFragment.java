@@ -57,7 +57,7 @@ public class PerfilFragment extends Fragment implements View.OnClickListener {
     private final int MY_PERMISSIONS = 100;
     private final int PHOTO_CODE = 200;
     private final int SELECT_PICTURE = 300;
-    private String TEMPORAL_PICTURE_NAME = "temporal.jpg";
+    private String TEMPORAL_PICTURE_NAME = getString(R.string.ejemplo);
     private UsuarioBean usuariobean;
 
     private TextView txtUsuario;
