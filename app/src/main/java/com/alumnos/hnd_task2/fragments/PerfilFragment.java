@@ -128,6 +128,7 @@ public class PerfilFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        //switch para elegir entre camara y galeria para cambiar la imagen de perfil
         switch (view.getId()) {
             case R.id.btnCambiar:
                 final CharSequence[] options = {getString(R.string.foto), getString(R.string.galeria), getString(R.string.cancelar)};
@@ -158,7 +159,7 @@ public class PerfilFragment extends Fragment implements View.OnClickListener {
             }
 
     }
-
+//abrir la camara
     private void openCamera() {
         File file = new File(Environment.getExternalStorageDirectory(), MEDIA_DIRECTORY);
         file.mkdirs();
@@ -172,7 +173,7 @@ public class PerfilFragment extends Fragment implements View.OnClickListener {
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(newFile));
         startActivityForResult(intent, PHOTO_CODE);
     }
-
+//cambia la imagen de perfil
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
