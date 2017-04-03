@@ -35,4 +35,6 @@
     <string name="appImg">Selecciona app de imagen</string>
     <string name="ejemplo">ejemplo.jpg</string>
     <string name="cambiarPass">Cambiar pass</string>
+    <string name="aceptar">aceptar</string>
+    <string name="cambiarPerfil">Cambiar perfil</string>
 </resources>

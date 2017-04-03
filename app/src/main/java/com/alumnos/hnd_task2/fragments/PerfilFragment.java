@@ -40,6 +40,7 @@ import com.alumnos.hnd_task2.MainActivity;
 import com.alumnos.hnd_task2.Preferencias;
 import com.alumnos.hnd_task2.R;
 import com.alumnos.hnd_task2.activities.PersonajeActivity;
+import com.alumnos.hnd_task2.activities.cambiarPass;
 import com.alumnos.hnd_task2.beans.UsuarioBean;
 
 import java.io.FileNotFoundException;
@@ -58,8 +59,7 @@ public class PerfilFragment extends Fragment implements View.OnClickListener {
     private final int MY_PERMISSIONS = 100;
     private final int PHOTO_CODE = 200;
     private final int SELECT_PICTURE = 300;
-    private String TEMPORAL_PICTURE_NAME = getString(R.string.ejemplo);
-    private UsuarioBean usuariobean;
+    private String TEMPORAL_PICTURE_NAME = "ejemplo.jpg";
 
     private TextView txtUsuario;
     private ImageView imgPerfil;
@@ -152,7 +152,8 @@ public class PerfilFragment extends Fragment implements View.OnClickListener {
                 builder.show();
                 break;
             case R.id.btnCambiarPass:
-
+                Intent intent = new Intent(getActivity(), cambiarPass.class);
+                startActivity(intent);
                 break;
             }
 
@@ -190,9 +191,9 @@ public class PerfilFragment extends Fragment implements View.OnClickListener {
                     Uri path = data.getData();
                     Log.d("PerfilFragment","------->"+path.toString());
                     imgPerfil.setImageURI(path);
-                    usuariobean = new UsuarioBean();
-                    usuariobean.setImgPerfil(path.toString());
                     Preferencias preferencias = new Preferencias(getActivity());
+                    UsuarioBean usuariobean = preferencias.getUsuario();
+                    usuariobean.setImgPerfil(path.toString());
                     preferencias.setUsuario(usuariobean);
                 }
         }

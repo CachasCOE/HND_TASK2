@@ -11,12 +11,18 @@
     tools:context="com.alumnos.hnd_task2.activities.cambiarPass"
     android:orientation="vertical">
 
-    <EditText android:id="@+id/editContra"
-        android:layout_width="wrap_content"
+    <EditText android:id="@+id/editNombre"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <EditText android:id="@+id/editContra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 
     <Button android:id="@+id/btnConfirmar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@string/aceptar"/>
 
 </LinearLayout>
