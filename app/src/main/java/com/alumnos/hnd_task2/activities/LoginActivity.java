@@ -1,6 +1,8 @@
 package com.alumnos.hnd_task2.activities;
 
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.Toast;
 import com.alumnos.hnd_task2.MainActivity;
 import com.alumnos.hnd_task2.Preferencias;
 import com.alumnos.hnd_task2.R;
+import com.alumnos.hnd_task2.api.ApiUsuarios;
 import com.alumnos.hnd_task2.beans.UsuarioBean;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -50,7 +53,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 //validar datos
                 String nombre = editNombre.getText().toString();
                 String pass = editContraseña.getText().toString();
-                if (nombre != null && pass != null && !nombre.isEmpty() && !pass.isEmpty()) {
+
+                Hilo hilo = new Hilo();
+                hilo.execute(nombre, pass);
+                /*if (nombre != null && pass != null && !nombre.isEmpty() && !pass.isEmpty()) {
                     Preferencias preferencias = new Preferencias(LoginActivity.this);
                     UsuarioBean usuarioBean = preferencias.getUsuario();
                     if (usuarioBean.getNombre() != null) {
@@ -62,16 +68,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             finish();
                         } else {
                             // datos incorrectos
-                            Toast.makeText(LoginActivity.this, getString(R.string.incorrectos), Toast.LENGTH_SHORT).show();
+                            Snackbar.make(view, "Datos Incorrectos", Snackbar.LENGTH_LONG)
+                                    .show();
                         }
                     }else{
                         //datos no existente
-                        Toast.makeText(LoginActivity.this, getString(R.string.noExiste), Toast.LENGTH_SHORT).show();
+                        Snackbar.make(view, "El usuario no existe", Snackbar.LENGTH_LONG)
+                                .show();
                     }
                 } else {
                     //datos obligatorios
-                    Toast.makeText(LoginActivity.this, getString(R.string.obligatorios), Toast.LENGTH_SHORT).show();
-                }
+                    Snackbar.make(view, "Datos son obligatorios", Snackbar.LENGTH_LONG)
+                            .show();
+                }*/
 
                 break;
 
@@ -82,5 +91,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
 
+    }
+
+    private class Hilo extends AsyncTask<String, Void, UsuarioBean> {
+
+        @Override
+        protected UsuarioBean doInBackground(String... args) {
+            String email = args[0];
+            String password = args[1];
+            ApiUsuarios api = new ApiUsuarios();
+            return api.login(email, password);
+
+        }
+
+        @Override
+        protected void onPostExecute(UsuarioBean usuarioBean) {
+            super.onPostExecute(usuarioBean);
+            if(usuarioBean!=null){
+                Preferencias preferencias = new Preferencias(LoginActivity.this);
+                preferencias.setUsuario(usuarioBean);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }else{
+                Snackbar.make(getCurrentFocus(), "Usuario incorrecto", Snackbar.LENGTH_LONG)
+                        .show();
+            }
+
+        }
     }
 }

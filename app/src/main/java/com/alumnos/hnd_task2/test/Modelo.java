@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 
 public class Modelo {
-    public static ArrayList<PersonajeBean> getPersonajes(){
+    /*public static ArrayList<PersonajeBean> getPersonajes(){
 
         ArrayList<PersonajeBean> personajes = new ArrayList<>();
 
@@ -20,5 +20,5 @@ public class Modelo {
 
         return personajes;
 
-    }
+    }*/
 }

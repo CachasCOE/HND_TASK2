@@ -1,7 +1,10 @@
 package com.alumnos.hnd_task2.activities;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Debug;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,13 +16,20 @@ import android.widget.Toast;
 import com.alumnos.hnd_task2.MainActivity;
 import com.alumnos.hnd_task2.Preferencias;
 import com.alumnos.hnd_task2.R;
+import com.alumnos.hnd_task2.api.ApiUsuarios;
 import com.alumnos.hnd_task2.beans.UsuarioBean;
+import com.alumnos.hnd_task2.fragments.Dialog.DialogPerfilFragment;
 
-public class cambiarPass extends AppCompatActivity implements View.OnClickListener {
+import static android.R.attr.password;
+
+public class cambiarPass extends AppCompatActivity implements View.OnClickListener, DialogPerfilFragment.MyDialogListener {
 
     private Button btnConfirmar;
     private EditText editContra, editNombre;
     private String foto;
+
+    private UsuarioBean usuarioBean;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +37,8 @@ public class cambiarPass extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_cambiar_pass);
 
         Preferencias preferencias = new Preferencias(cambiarPass.this);
-        UsuarioBean usuarioBean = preferencias.getUsuario();
+        usuarioBean = preferencias.getUsuario();
+        token = usuarioBean.getToken();
 
         btnConfirmar = (Button) findViewById(R.id.btnConfirmar);
         editContra = (EditText) findViewById(R.id.editContra);
@@ -51,23 +62,60 @@ public class cambiarPass extends AppCompatActivity implements View.OnClickListen
         if(!nombre.isEmpty() && nombre!=null && pass!=null && !pass.isEmpty()){
 
 
-            //coge el usuario ya guardado y permite cambiarlo
-            Preferencias preferencias = new Preferencias(cambiarPass.this);
-            UsuarioBean usuarioBean = preferencias.getUsuario();
-            usuarioBean.setNombre(nombre);
-            usuarioBean.setPass(pass);
+            usuarioBean = new UsuarioBean(nombre, pass);
+            usuarioBean.setToken(token);
 
-            preferencias.setUsuario(usuarioBean);
+            DialogPerfilFragment dialogCorrectFragment = DialogPerfilFragment.newInstance();
+            dialogCorrectFragment.show(getSupportFragmentManager(), "Dialog");
+        }else{
+            Snackbar.make(getCurrentFocus(), "Necesitas introducir los datos", Snackbar.LENGTH_LONG)
+                    .show();
+        }
+    }
 
+    @Override
+    public void onPositiveClick(DialogFragment dialogFragment) {
+        HiloUpdate hiloUpdate = new HiloUpdate();
+        hiloUpdate.execute();
+        Intent intent = new Intent(cambiarPass.this, MainActivity.class);
+        startActivity(intent);
+        finish();
 
-            //mensaje de guardado
-            Toast.makeText(cambiarPass.this,
-                    getString(R.string.guardado),
-                    Toast.LENGTH_SHORT).show();
-            //abre main activity despues del registro
-            Intent intent = new Intent(cambiarPass.this, MainActivity.class);
-            startActivity(intent);
-            finish();
+    }
+
+    @Override
+    public void onNegativeClick(DialogFragment dialogFragment) {
+
+    }
+
+    private class HiloUpdate extends AsyncTask<Void, Void, Integer> {
+
+        @Override
+        protected Integer doInBackground(Void... voids) {
+
+            ApiUsuarios apiUsuario = new ApiUsuarios();
+
+            return apiUsuario.updateUsuario(usuarioBean.getNombre(), usuarioBean.getPass(), usuarioBean.getToken());
+        }
+
+        @Override
+        protected void onPostExecute(Integer resultado) {
+            super.onPostExecute(resultado);
+
+            if(resultado == 200){
+
+                Preferencias preferencias = new Preferencias(cambiarPass.this);
+                preferencias.setUsuario(usuarioBean);
+                preferencias.setFlag(true);
+
+                finish();
+
+            }else{
+
+                Snackbar.make(getCurrentFocus(), "Ha habido un error al hacer la peticion", Snackbar.LENGTH_LONG)
+                        .show();
+
+            }
         }
     }
 }

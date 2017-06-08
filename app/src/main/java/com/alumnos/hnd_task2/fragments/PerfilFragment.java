@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -16,6 +17,7 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -39,9 +41,12 @@ import java.io.InputStream;
 import com.alumnos.hnd_task2.MainActivity;
 import com.alumnos.hnd_task2.Preferencias;
 import com.alumnos.hnd_task2.R;
+import com.alumnos.hnd_task2.activities.LoginActivity;
 import com.alumnos.hnd_task2.activities.PersonajeActivity;
 import com.alumnos.hnd_task2.activities.cambiarPass;
+import com.alumnos.hnd_task2.api.ApiUsuarios;
 import com.alumnos.hnd_task2.beans.UsuarioBean;
+import com.alumnos.hnd_task2.fragments.Dialog.DialogDarBajaFragment;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -51,7 +56,7 @@ import static android.support.v7.appcompat.R.id.checkbox;
 import static android.support.v7.appcompat.R.id.image;
 
 
-public class PerfilFragment extends Fragment implements View.OnClickListener {
+public class PerfilFragment extends Fragment implements View.OnClickListener{
 
     private static String APP_DIRECTORY = "MyPictureApp/";
     private static String MEDIA_DIRECTORY = APP_DIRECTORY + "PictureApp";
@@ -63,7 +68,7 @@ public class PerfilFragment extends Fragment implements View.OnClickListener {
 
     private TextView txtUsuario;
     private ImageView imgPerfil;
-    private Button btnCambiar, btnCambiarPass;
+    private Button btnCambiar, btnCambiarPass, btnBaja;
     private LinearLayout LView;
 
     private String mPath;
@@ -85,10 +90,12 @@ public class PerfilFragment extends Fragment implements View.OnClickListener {
         imgPerfil = (ImageView) view.findViewById(R.id.imgPerfil);
         btnCambiar = (Button) view.findViewById(R.id.btnCambiar);
         btnCambiarPass = (Button) view.findViewById(R.id.btnCambiarPass);
+        btnBaja = (Button) view.findViewById(R.id.btnBaja);
         LView = (LinearLayout) view.findViewById(R.id.LView);
 
         btnCambiar.setOnClickListener(this);
         btnCambiarPass.setOnClickListener(this);
+        btnBaja.setOnClickListener(this);
 
         Preferencias preferencias = new Preferencias(getActivity());
         UsuarioBean usuario = preferencias.getUsuario();
@@ -156,6 +163,10 @@ public class PerfilFragment extends Fragment implements View.OnClickListener {
                 Intent intent = new Intent(getActivity(), cambiarPass.class);
                 startActivity(intent);
                 break;
+            case R.id.btnBaja:
+                DialogDarBajaFragment dialogDarBajaFragment = DialogDarBajaFragment.newInstance();
+                dialogDarBajaFragment.show(getFragmentManager(), "DialogBaja");
+                break;
             }
 
     }
@@ -207,11 +218,13 @@ public class PerfilFragment extends Fragment implements View.OnClickListener {
         imgPerfil.setImageBitmap(bitmap);
     }
 
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 
 
-    }
+
+}
 

@@ -1,8 +1,12 @@
 package com.alumnos.hnd_task2.activities;
 
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,9 +14,11 @@ import android.widget.Toast;
 
 import com.alumnos.hnd_task2.Preferencias;
 import com.alumnos.hnd_task2.R;
+import com.alumnos.hnd_task2.api.ApiUsuarios;
 import com.alumnos.hnd_task2.beans.UsuarioBean;
+import com.alumnos.hnd_task2.fragments.Dialog.DialogRegistroFragment;
 
-public class NuevoUsuarioActivity extends AppCompatActivity implements View.OnClickListener{
+public class NuevoUsuarioActivity extends AppCompatActivity implements View.OnClickListener, DialogRegistroFragment.MyDialogListener{
 
     private EditText editNombre, editPass, editPass2;
     private Button btnGuardar;
@@ -40,24 +46,59 @@ public class NuevoUsuarioActivity extends AppCompatActivity implements View.OnCl
 
         if(nombre!=null&& pass!=null && pass2!=null &&
                 !nombre.isEmpty() && !pass.isEmpty() && !pass2.isEmpty()){
-            //email formato correcto, pass y pass2 iguales
-            UsuarioBean usuarioBean = new UsuarioBean(nombre, pass);
-
-
-            Preferencias preferencias = new Preferencias(NuevoUsuarioActivity.this);
-            preferencias.setUsuario(usuarioBean);
-            //mensaje de guardado
-            Toast.makeText(NuevoUsuarioActivity.this,
-                    getString(R.string.guardado),
-                    Toast.LENGTH_SHORT).show();
-            //abre login activity despues del registro
-            Intent intent = new Intent(NuevoUsuarioActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
+            Hilo hilo = new Hilo();
+            hilo.execute(nombre, pass);
         }else{
-            Toast.makeText(NuevoUsuarioActivity.this,
-                    getString(R.string.obligatorios),
-                    Toast.LENGTH_SHORT).show();
+            Snackbar.make(view, "Datos son obligatorios", Snackbar.LENGTH_LONG)
+                    .show();
         }
+    }
+
+    private class Hilo extends AsyncTask<String, Void, Integer> {
+
+
+        @Override
+        protected Integer doInBackground(String... args) {
+
+            String nombre = args[0];
+            String pass = args[1];
+
+            ApiUsuarios usuarioApi = new ApiUsuarios();
+
+            return usuarioApi.nuevoUsuario(nombre, pass);        }
+
+        @Override
+        protected void onPostExecute(Integer resultado) {
+            super.onPostExecute(resultado);
+
+            if(resultado == 200){
+                DialogRegistroFragment dialogCorrectFragment = DialogRegistroFragment.newInstance();
+                dialogCorrectFragment.show(getSupportFragmentManager(), "Dialog");
+            }
+
+            else{
+                Log.d("NuevoUsuarioActivity", "RESULTADO:"+resultado);
+                Snackbar.make(getCurrentFocus(), "El usuario ya existe", Snackbar.LENGTH_LONG)
+                        .show();
+
+            }
+
+        }
+    }
+
+
+    @Override
+    public void onPositiveClick(DialogFragment dialogFragment) {
+        Preferencias preferencias = new Preferencias(NuevoUsuarioActivity.this);
+        preferencias.setFlag(true);
+
+        Intent intent = new Intent(NuevoUsuarioActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onNegativeClick(DialogFragment dialogFragment) {
+
     }
 }

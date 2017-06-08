@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.alumnos.hnd_task2.R;
 import com.alumnos.hnd_task2.beans.PersonajeBean;
 import com.alumnos.hnd_task2.fragments.ListPersonajesFragment;
+import com.squareup.picasso.Picasso;
 
 public class PersonajeActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -34,7 +35,10 @@ public class PersonajeActivity extends AppCompatActivity implements View.OnClick
 
         txtDescripcion.setText(personajeBean.getDescripcion());
 
-        imgPersonaje.setImageDrawable(ContextCompat.getDrawable(this,personajeBean.getFoto()));
+        Picasso.with(this)
+                .load(personajeBean.getImagen())
+                .resize(400,400)                        // optional
+                .into(imgPersonaje);
 
         btnComp.setOnClickListener(this);
     }

@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 public class TipsBean implements Serializable {
     private String descripcion, titulo;
+    private int id;
 
 
     public TipsBean(String descripcion, String titulo) {
@@ -20,6 +21,14 @@ public class TipsBean implements Serializable {
     public String getDescripcion() {
 
         return descripcion;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setDescripcion(String descripcion) {

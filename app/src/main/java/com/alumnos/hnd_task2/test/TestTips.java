@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 
 public class TestTips{
-    public static ArrayList<TipsBean> getTips(){
+   /* public static ArrayList<TipsBean> getTips(){
 
         ArrayList<TipsBean> tips = new ArrayList<>();
 
@@ -21,5 +21,5 @@ public class TestTips{
 
         return tips;
 
-    }
+    }*/
 }

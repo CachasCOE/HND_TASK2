@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 
 public class ModeloObjeto {
-    public static ArrayList<ObjetoBean> getObjetos(){
+    /*public static ArrayList<ObjetoBean> getObjetos(){
 
         ArrayList<ObjetoBean> objetos = new ArrayList<>();
 
@@ -21,6 +21,6 @@ public class ModeloObjeto {
 
         return objetos;
 
-    }
+    }*/
 }
 

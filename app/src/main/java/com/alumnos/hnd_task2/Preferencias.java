@@ -14,6 +14,7 @@ public class Preferencias {
     private Context context;
     private final String PREFERENCIAS = "preferencias";
     private final String LOGIN = "login";
+    private final String FLAG = "flag";
     private final String USUARIO = "usuario";
 
     public Preferencias(Context context) {
@@ -40,6 +41,12 @@ public class Preferencias {
 
     }
 
+    public void removeUsuario(){
+        SharedPreferences.Editor editor = context.getSharedPreferences(PREFERENCIAS, Context.MODE_PRIVATE).edit();
+        editor.remove(USUARIO);
+        editor.commit();
+    }
+
     // guarda el login
     public void setLogin(boolean login){
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCIAS,
@@ -58,5 +65,23 @@ public class Preferencias {
         return sharedPreferences.getBoolean(LOGIN, false);
     }
 
+    public void setFlag(boolean flag){
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCIAS,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putBoolean(FLAG,flag);
+
+        editor.commit();
+
+    }
+
+    public boolean getFlag(){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCIAS,
+                Context.MODE_PRIVATE);
+
+        return sharedPreferences.getBoolean(FLAG, false);
+    }
 
 }

@@ -1,15 +1,21 @@
 package com.alumnos.hnd_task2.beans;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.io.StringReader;
 
 /**
  * Created by ALUMNOS on 10/03/2017.
  */
 
 public class UsuarioBean implements Serializable {
-    private String nombre, pass, imgPerfil;
+    @SerializedName("email")
+    private String nombre;
+    @SerializedName("password")
+    private String pass;
+    private String imgPerfil, token;
 
     public UsuarioBean(String nombre, String pass) {
         this.nombre = nombre;
@@ -17,6 +23,14 @@ public class UsuarioBean implements Serializable {
     }
 
     public UsuarioBean() {
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     // getters y setters del usuario
